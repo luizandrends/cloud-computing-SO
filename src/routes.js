@@ -3,6 +3,7 @@ import { Router } from 'express';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import MonitoringController from './app/controllers/MonitoringController';
+import SubscriptionController from './app/controllers/SubscriptionController';
 
 import auth from './app/middlewares/auth';
 
@@ -14,5 +15,7 @@ routes.post('/users', UserController.store);
 routes.use(auth);
 
 routes.post('/monitoring', MonitoringController.store);
+
+routes.post('/subscriptions', SubscriptionController.store);
 
 export default routes;
