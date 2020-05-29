@@ -1,8 +1,16 @@
+import User from '../models/User';
+
 class UserController {
   async store(request, response) {
-    return response.json({
-      ok: true,
+    const { name, email, password } = request.body;
+
+    const user = await User.create({
+      name,
+      email,
+      password,
     });
+
+    return response.json(user);
   }
 }
 
