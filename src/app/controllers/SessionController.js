@@ -10,6 +10,10 @@ class SessionController {
       where: { email },
     });
 
+    if (!findUser) {
+      return response.json({ err: 'Users dosen`t exist' });
+    }
+
     const passwordValidate = await compare(password, findUser.password);
 
     if (!passwordValidate) {
