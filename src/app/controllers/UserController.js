@@ -6,6 +6,14 @@ class UserController {
   async store(request, response) {
     const { name, email, password } = request.body;
 
+    const findEmail = await User.findOne({
+      where: { email },
+    });
+
+    if (findEmail) {
+      return response.status(400).json({ err: 'Email already exist' });
+    }
+
     const passwordHashed = await hash(password, 8);
 
     const user = await User.create({
