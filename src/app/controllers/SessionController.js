@@ -1,26 +1,41 @@
 import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 
 import User from '../models/User';
+import authConfig from '../../config/auth';
 
 class SessionController {
   async store(request, response) {
     const { email, password } = request.body;
 
-    const findUser = await User.findOne({
+    const user = await User.findOne({
       where: { email },
     });
 
-    if (!findUser) {
+    if (!user) {
       return response.json({ err: 'Users dosen`t exist' });
     }
 
-    const passwordValidate = await compare(password, findUser.password);
+    const passwordValidate = await compare(password, user.password);
 
     if (!passwordValidate) {
       return response.json({ err: 'Invalid mail or password' });
     }
 
-    return response.json(passwordValidate);
+    const { id, name } = user;
+
+    const createToken = sign({ id }, authConfig.secret, {
+      expiresIn: authConfig.expiresIn,
+    });
+
+    return response.json({
+      user: {
+        id,
+        name,
+        email,
+      },
+      token: createToken,
+    });
   }
 }
 
