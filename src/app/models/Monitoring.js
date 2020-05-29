@@ -6,7 +6,7 @@ class Monitoring extends Model {
     super.init(
       {
         course: Sequelize.STRING,
-        class: Sequelize.STRING,
+        crew: Sequelize.STRING,
         subject_matter: Sequelize.STRING,
         date: Sequelize.DATE,
         deleted_at: Sequelize.DATE,
