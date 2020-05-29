@@ -12,6 +12,19 @@ class MonitoringController {
       return response.status(400).json({ err: 'Past dates are not permitted' });
     }
 
+    const checkAvaliability = await Monitoring.findOne({
+      where: {
+        course,
+        subject_matter,
+        date,
+        deleted_at: null,
+      },
+    });
+
+    if (checkAvaliability) {
+      return response.json({ err: 'Date is not available' });
+    }
+
     const monitoring = await Monitoring.create({
       user_id: request.userId,
       course,
