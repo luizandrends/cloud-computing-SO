@@ -13,13 +13,13 @@ class SessionController {
     });
 
     if (!user) {
-      return response.json({ err: 'Users dosen`t exist' });
+      return response.status(400).json({ err: 'Users dosen`t exist' });
     }
 
     const passwordValidate = await compare(password, user.password);
 
     if (!passwordValidate) {
-      return response.json({ err: 'Invalid mail or password' });
+      return response.status(400).json({ err: 'Invalid mail or password' });
     }
 
     const { id, name } = user;
