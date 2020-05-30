@@ -17,5 +17,6 @@ routes.use(auth);
 routes.post('/monitoring', MonitoringController.store);
 
 routes.post('/subscriptions/:monitoringId', SubscriptionController.store);
+routes.get('/subscriptions/:id', SubscriptionController.list);
 
 export default routes;

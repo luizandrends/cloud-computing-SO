@@ -3,6 +3,21 @@ import User from '../models/User';
 import Subscription from '../models/Subscription';
 
 class SubscriptionController {
+  async list(request, response) {
+    const subscriptions = await Subscription.findAll({
+      where: { user_id: request.userId },
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name', 'email'],
+        },
+      ],
+    });
+
+    return response.json(subscriptions);
+  }
+
   async store(request, response) {
     const monitoring = await Monitoring.findByPk(request.params.monitoringId, {
       include: [
