@@ -4,13 +4,15 @@ import Subscription from '../models/Subscription';
 
 class SubscriptionController {
   async list(request, response) {
+    const { id } = request.params;
+
     const subscriptions = await Subscription.findAll({
-      where: { user_id: request.userId },
+      where: { monitoring_id: id },
       include: [
         {
           model: User,
           as: 'user',
-          attributes: ['name', 'email'],
+          attributes: ['name'],
         },
       ],
     });

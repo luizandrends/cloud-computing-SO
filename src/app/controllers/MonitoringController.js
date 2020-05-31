@@ -1,8 +1,26 @@
 import { startOfHour, parseISO, isBefore } from 'date-fns';
 
 import Monitoring from '../models/Monitoring';
+import User from '../models/User';
 
 class MonitoringController {
+  async get(request, response) {
+    const { id } = request.params;
+
+    const findMonitoring = await Monitoring.findOne({
+      where: { id },
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name', 'email'],
+        },
+      ],
+    });
+
+    return response.json(findMonitoring);
+  }
+
   async list(requst, response) {
     const monitorings = await Monitoring.findAll();
 
