@@ -3,6 +3,12 @@ import { startOfHour, parseISO, isBefore } from 'date-fns';
 import Monitoring from '../models/Monitoring';
 
 class MonitoringController {
+  async list(requst, response) {
+    const monitorings = await Monitoring.findAll();
+
+    return response.json(monitorings);
+  }
+
   async store(request, response) {
     const { course, crew, subject_matter, date } = request.body;
 

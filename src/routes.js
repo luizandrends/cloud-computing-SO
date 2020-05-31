@@ -15,6 +15,7 @@ routes.post('/users', UserController.store);
 routes.use(auth);
 
 routes.post('/monitoring', MonitoringController.store);
+routes.get('/monitoring', MonitoringController.list);
 
 routes.post('/subscriptions/:monitoringId', SubscriptionController.store);
 routes.get('/subscriptions/:id', SubscriptionController.list);
