@@ -1,6 +1,14 @@
+import Monitoring from '../models/Monitoring';
+
 class MyMonitoringsController {
   async list(request, response) {
-    return response.json({ ok: true });
+    const { id } = request.params;
+
+    const monitorings = await Monitoring.findAll({
+      where: { user_id: id },
+    });
+
+    return response.json(monitorings);
   }
 }
 
