@@ -59,6 +59,26 @@ class MonitoringController {
 
     return response.json(monitoring);
   }
+
+  async destroy(request, response) {
+    const { id } = request.params;
+
+    const findMonitoring = await Monitoring.findOne({
+      where: { id },
+    });
+
+    if (!findMonitoring.cancelable) {
+      return response
+        .status(400)
+        .json({ err: 'You can only delete monitorings two hours in advance' });
+    }
+
+    await Monitoring.destroy({
+      where: { id },
+    });
+
+    return response.json({ ok: true });
+  }
 }
 
 export default new MonitoringController();

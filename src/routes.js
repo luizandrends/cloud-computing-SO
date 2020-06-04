@@ -18,6 +18,7 @@ routes.use(auth);
 routes.post('/monitoring', MonitoringController.store);
 routes.get('/monitoring', MonitoringController.list);
 routes.get('/monitoring/:id', MonitoringController.get);
+routes.delete('/monitoring/:id', MonitoringController.destroy);
 
 routes.get('/mymonitorings/:id', MyMonitoringsController.list);
 
