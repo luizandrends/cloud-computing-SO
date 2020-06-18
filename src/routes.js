@@ -12,6 +12,11 @@ const routes = Router();
 
 routes.post('/sessions', SessionController.store);
 routes.post('/users', UserController.store);
+routes.get('/cloudcomputing', (request, response) => {
+  response.json({
+    cloudComputing: 'Testando acesso do mundo inteiro',
+  });
+});
 
 routes.use(auth);
 
@@ -24,11 +29,5 @@ routes.get('/mymonitorings/:id', MyMonitoringsController.list);
 
 routes.post('/subscriptions/:monitoringId', SubscriptionController.store);
 routes.get('/subscriptions/:id', SubscriptionController.list);
-
-routes.get('/cloudcomputing', (request, response) => {
-  response.json({
-    cloudComputing: 'Testando acesso do mundo inteiro',
-  });
-});
 
 export default routes;
