@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import Youch from 'youch';
 import express from 'express';
 import cors from 'cors';
